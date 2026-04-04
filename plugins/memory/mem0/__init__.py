@@ -262,7 +262,7 @@ class Mem0MemoryProvider(MemoryProvider):
                     {"role": "user", "content": user_content},
                     {"role": "assistant", "content": assistant_content},
                 ]
-                client.add(messages, filters={"user_id": self._user_id, "agent_id": self._agent_id})
+                client.add(messages, user_id=self._user_id, agent_id=self._agent_id)
                 self._record_success()
             except Exception as e:
                 self._record_failure()
@@ -330,7 +330,8 @@ class Mem0MemoryProvider(MemoryProvider):
             try:
                 client.add(
                     [{"role": "user", "content": conclusion}],
-                    filters={"user_id": self._user_id, "agent_id": self._agent_id},
+                    user_id=self._user_id,
+                    agent_id=self._agent_id,
                     infer=False,
                 )
                 self._record_success()
